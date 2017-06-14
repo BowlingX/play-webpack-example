@@ -1,0 +1,38 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false
+      }
+    ],
+    "react",
+    "flow"
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    [
+      "lodash",
+      {
+        "id": [
+          "semantic-ui-react",
+          "lodash-es"
+        ]
+      }
+    ]
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-inline-elements"
+      ]
+    },
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    }
+  }
+}

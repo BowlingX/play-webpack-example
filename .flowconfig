@@ -1,0 +1,14 @@
+[ignore]
+.*/node_modules/.*
+
+[include]
+./assets/js/
+
+
+[options]
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/.flow/CSSFlowStub.js.flow'
+module.name_mapper.extension='css' -> '<PROJECT_ROOT>/.flow/CSSFlowStub.js.flow'
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable
+suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
+module.ignore_non_literal_requires=true

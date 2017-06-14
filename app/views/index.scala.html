@@ -1,0 +1,8 @@
+@(rendered: String, initialState: String)
+
+    @main("play-webpack-example") {
+        <script>
+            window.__STATE__ = @Html(initialState);
+        </script>
+        <div data-app>@Html(rendered)</div>
+    }

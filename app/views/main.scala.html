@@ -1,0 +1,27 @@
+@(title: String)(content: Html)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @* Here's where we render the page title `String`. *@
+        <title>@title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        @WebpackManifest.main.css.map { css =>
+            <link rel="stylesheet" media="screen" href="@css">
+        }
+    </head>
+    <body>
+        @content
+        @WebpackManifest.main.js.map { src =>
+            <script type="application/javascript">
+            window.init = function() {
+              var script = document.createElement('script');
+              script.async = true;
+              script.src = '@src';
+              script.defer = true;
+              document.body.appendChild(script);
+            }
+        </script>
+        }
+        <script src="@WebpackManifest.vendor.js.get" async defer type="text/javascript" onload="init()"></script>
+    </body>
+</html>
