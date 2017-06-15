@@ -1,0 +1,52 @@
+upstream play {
+  server api:9000;
+}
+
+server_tokens off;
+
+gzip on;
+gzip_comp_level 9;
+gzip_proxied any;
+gzip_http_version 1.1;
+gzip_types
+    text/plain
+    text/css
+    text/js
+    text/xml
+    text/javascript
+    application/javascript
+    application/x-javascript
+    application/json
+    application/xml
+    application/rss+xml
+    image/svg+xml;
+
+proxy_cache_path /var/lib/nginx/cache levels=1:2 keys_zone=one:200m;
+proxy_cache_key $host$uri$is_args$args;
+proxy_cache_valid 200 10m;
+
+server {
+  listen       ${NGINX_PORT};
+  proxy_buffering    off;
+  proxy_set_header   X-Real-IP $remote_addr;
+  proxy_set_header   X-Scheme $scheme;
+  proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header   Host $http_host;
+  proxy_cache_methods GET HEAD;
+
+  proxy_http_version 1.1;
+  server_name localhost vexquisit.com www.vexquisit.com;
+
+  location / {
+    proxy_pass http://play;
+  }
+
+  location ~ ^/(assets)/ {
+     proxy_cache one;
+     proxy_cache_key "$host$request_uri";
+     proxy_cache_valid 200 30d;
+     proxy_cache_valid 301 302 10m;
+     proxy_cache_valid 404 1m;
+     proxy_pass http://play;
+  }
+}

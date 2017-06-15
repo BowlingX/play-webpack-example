@@ -1,0 +1,49 @@
+machine:
+  environment:
+    YARN_VERSION: 0.24.6
+    PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+    SBT_OPTS: "-XX:+CMSClassUnloadingEnabled -Xms4072m -Xmx4072m -XX:ReservedCodeCacheSize=512m -Dfile.encoding=UTF8"
+    DB_URL: "jdbc:postgresql://localhost/vexquisit?user=vexquisit&password=dev"
+
+  node:
+    version: 6.1.0
+  java:
+    version: oraclejdk8
+  services:
+    - docker
+    - postgresql
+
+dependencies:
+  pre:
+    - |
+      if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
+        curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+      fi
+  cache_directories:
+    - "~/.yarn"
+    - "~/.cache/yarn"
+    - "~/.ivy2"
+    - "~/.m2"
+    - "~/.sbt"
+    - "target/resolution-cache"
+    - "target/streams"
+    - "project/target/resolution-cache"
+    - "project/target/streams"
+  override:
+    - yarn install
+    - NODE_ENV=production yarn run dist
+    - cat /dev/null | sbt test:compile
+
+test:
+  override:
+    - cat /dev/null | sbt test
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - ./build-base.sh
+      - cat /dev/null | sbt docker:publishLocal
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push bowlingx/play-webpack-example
+      - docker push bowlingx/play-webpack-example-nginx
