@@ -46,4 +46,3 @@ deployment:
       - cat /dev/null | sbt docker:publishLocal
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push bowlingx/play-webpack-example
-      - docker push bowlingx/play-webpack-example-nginx
