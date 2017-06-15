@@ -27,7 +27,8 @@ Backend and frontend are build separately. The Backend is an ordinary play proje
 on the JS Event-Loop that `play-webpack` creates.
 
 The Frontend part is a webpack2 configured react project. It includes `flow` and `eslint` rules and validation.
-Additionally I added react-router (no routes configured)
+Additionally I added react-router.
+
 ### Start
 
 - `yarn install` to install all frontend dependencies
