@@ -3,7 +3,6 @@ machine:
     YARN_VERSION: 0.24.6
     PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
     SBT_OPTS: "-XX:+CMSClassUnloadingEnabled -Xms4072m -Xmx4072m -XX:ReservedCodeCacheSize=512m -Dfile.encoding=UTF8"
-    DB_URL: "jdbc:postgresql://localhost/vexquisit?user=vexquisit&password=dev"
 
   node:
     version: 6.1.0
