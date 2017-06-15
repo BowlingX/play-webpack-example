@@ -6,9 +6,8 @@ play-webpack-example
 
 This Example demonstrates `play-webpack`
 
-- Renders a react application on the server
+- Utilises Isomorphic server side rendering (with React)
 - Uses GraphQL with `apollo-client` on the frontend and `sangria` on the backend to execute async calls.
-- Utilises Isomorphic server side rendering
 
 ## Run with docker
 
