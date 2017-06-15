@@ -1,11 +1,20 @@
 play-webpack-example
 --------------------
 
+[![CircleCI](https://img.shields.io/circleci/project/github/BowlingX/play-webpack-example.svg)](https://circleci.com/gh/BowlingX/play-webpack-example)
+
+
 This Example demonstrates `play-webpack`
 
 - Renders a react application on the server
 - Uses GraphQL with `apollo-client` on the frontend and `sangria` on the backend to execute async calls.
 
+
+## Run with docker
+
+If you just want to know what it exactly does, try the docker container:
+
+    docker run -p 9000:9000 bowlingx/play-webpack-example:0.1.0-SNAPSHOT -Dplay.http.secret.key=notSoSecret
 
 ## Install
 
