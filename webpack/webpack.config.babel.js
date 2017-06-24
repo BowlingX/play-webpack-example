@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import path from 'path';
 import AssetsPlugin from 'assets-webpack-plugin';
-import ExtractChunkTextPlugin from 'extract-css-chunks-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import FlowWebpackPlugin from 'flow-status-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import EslintPlugin from 'webpack-eslint-plugin';
@@ -42,7 +42,7 @@ export default(env) => {
 
   const CSS_BUNDLE_FILE = IS_PROD ? '[chunkhash].[name].css' : '[name].css';
 
-  const extractCss = new ExtractChunkTextPlugin({
+  const extractCss = new ExtractTextPlugin({
     filename: CSS_BUNDLE_FILE
   });
 
@@ -129,7 +129,7 @@ export default(env) => {
   }
   loaders.push({
       test: /\.scss$/,
-      loader: ExtractChunkTextPlugin.extract({
+      loader: ExtractTextPlugin.extract({
         fallback: "style-loader",
         use: [
           'css-loader?sourceMap=true&localIdentName=[name]_[local]_[hash:base64:5]&importLoaders=1!postcss-loader',
@@ -140,7 +140,7 @@ export default(env) => {
     },
     {
       test: /\.css/,
-      loader: ExtractChunkTextPlugin.extract({
+      loader: ExtractTextPlugin.extract({
         fallback: "style-loader",
         use: [
           'css-loader'
