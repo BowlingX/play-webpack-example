@@ -12,7 +12,7 @@ object PlayWebpackExampleProject {
       ws,
       guice,
       filters,
-      "com.bowlingx" %% "play-webpack" % "0.1.11",
+      "com.bowlingx" %% "play-webpack" % "0.1.13",
       "org.scalatestplus.play" %% "scalatestplus-play" % "3.0.0-RC1" % Test,
       "org.sangria-graphql" %% "sangria" % "1.2.1",
       "org.sangria-graphql" %% "sangria-play-json" % "1.0.2"
