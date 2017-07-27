@@ -4,7 +4,7 @@
 
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { getDataFromTree } from "react-apollo/lib/server";
+import { getDataFromTree } from "react-apollo/server";
 import { StaticRouter } from 'react-router';
 import BaseContainerCreator from '../store/BaseContainer';
 import Home from '../pages/Home';
